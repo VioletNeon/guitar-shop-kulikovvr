@@ -1,13 +1,22 @@
 .page-header {
+  background-color: $opacity-gray;
+  min-width: 1020px;
+}
+
+.page-header__wrapper {
   display: flex;
   padding: 0 40px;
-  background-color: $opacity-gray;
-
-  outline: 5px solid rgba(255, 0, 0, 0.7);
-  outline-offset: -5px;
+  margin: 0 auto;
+  max-width: 1020px;
 }
 
 .page-header__logo-link {
   margin-top: 27px;
   height: fit-content;
+}
+
+.page-header__wrapper-decoration {
+  width: 100%;
+  padding: 25px 0 0 0;
+  background-color: $white;
 }

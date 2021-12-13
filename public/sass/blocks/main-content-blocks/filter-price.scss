@@ -1,0 +1,18 @@
+.filter-price__range {
+  display: flex;
+  column-gap: 13px;
+  align-items: center;
+}
+
+.filter-price__price input {
+  @include font-special(400);
+  @include font-size(14px, 10px);
+
+  border: 0.7px solid $middle-gray;
+  border-radius: 2px;
+  height: 28px;
+  color: $dark-opacity-gray;
+  letter-spacing: 0.05em;
+  text-align: center;
+  width: 100%;
+}

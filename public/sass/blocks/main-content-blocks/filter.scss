@@ -1,0 +1,82 @@
+.filter {
+  padding: 75px 0 30px 0;
+  border: none;
+  border-top: 0.7px solid $bright-gray;
+  margin: 0;
+  position: relative;
+}
+
+.filter__tittle {
+  @include font-special(700);
+  @include font-size(18px, 21px);
+
+  margin: 0 ;
+  position: absolute;
+  background-color: transparent;
+  top: 35px;
+}
+
+.filter__list {
+  @include reset-list-style();
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}
+
+.filter__item {
+  width: max-content;
+}
+
+.filter__parameter {
+  @include font-special(400);
+  @include font-size(16px, 19px);
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: $black;
+  cursor: pointer;
+}
+
+.filter__parameter:hover .filter__checkbox-arrow {
+  border: 0.7px solid $dark-gray;
+}
+
+.filter__parameter:active .filter__checkbox-arrow {
+  border: 0.7px solid $gray;
+}
+
+.filter__parameter:disabled .filter__checkbox-arrow {
+  border: 0.7px solid $mouse-gray;
+  background: $gray-white;
+}
+
+.filter__checkbox-arrow path {
+  fill: transparent;
+}
+
+.filter__parameter > input:checked ~ .filter__checkbox-arrow path {
+  fill: $dark-gray;
+}
+
+.filter__parameter > input:disabled ~ .filter__checkbox-arrow {
+  border: 0.7px solid $mouse-gray;
+  background: $gray-white;
+}
+
+.filter__parameter > input:disabled ~ span {
+  color: $mouse-gray;
+}
+
+.filter__parameter span {
+  margin-left: 16px;
+}
+
+.filter__checkbox-arrow {
+  margin: 0;
+  width: 24px;
+  height: 24px;
+  border: 0.7px solid $middle-gray;
+  border-radius: 2px;
+}

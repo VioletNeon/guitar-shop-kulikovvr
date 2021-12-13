@@ -1,0 +1,26 @@
+.filter-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-form__button {
+  @include font-special(700);
+  @include font-size(12px, 14px);
+
+  margin: 10px 0 0 0;
+  padding: 9px 28px;
+  width: fit-content;
+  color: $white;
+  text-transform: uppercase;
+  background: $gray;
+  border: none;
+  border-radius: 2px;
+
+  &:hover {
+    background: $dark-gray;
+  }
+
+  &:active {
+    background: $middle-gray;
+  }
+}

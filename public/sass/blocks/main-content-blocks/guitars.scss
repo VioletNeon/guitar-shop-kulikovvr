@@ -1,0 +1,80 @@
+.guitars {
+  @include reset-list-style();
+
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  row-gap: 30px;
+}
+
+.guitars__item {
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 13px 19px 13px;
+  border: 1px solid $bright-gray;
+  box-sizing: border-box;
+}
+
+.guitars__image {
+  margin: 0 auto;
+}
+
+.guitars__wrapper-rating {
+  display: flex;
+  align-items: center;
+}
+
+.guitars__wrapper-rating span {
+  @include font-special(400);
+  @include font-size(10px, 15px);
+
+  color: $middle-gray;
+  letter-spacing: 0.1em;
+}
+
+.guitars__wrapper-description {
+  @include font-special(400);
+  @include font-size(14px, 15px);
+
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0 12px 0;
+}
+
+.guitars__tittle,
+.guitars__price {
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.guitars__wrapper-button {
+  display: flex;
+  column-gap: 16px;
+}
+
+.guitars__button-detail,
+.guitars__button-buy {
+  @include font-special(700);
+  @include font-size(12px, 15px);
+
+  flex-grow: 1;
+  color: $white;
+  border: none;
+  border-radius: 2px;
+  padding: 7px 0 5px 0;
+}
+
+.guitars__button-detail {
+  background-color: $gray;
+}
+
+.guitars__button-buy {
+  background-color: $orange;
+}
+
+.guitars__button-buy svg {
+  margin: 0 6px 0 0;
+  position: relative;
+  top: 1px;
+}
