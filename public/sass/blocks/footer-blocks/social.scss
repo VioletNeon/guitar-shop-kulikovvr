@@ -1,0 +1,15 @@
+.social {
+  @include reset-list-style();
+
+  display: flex;
+  column-gap: 22px;
+  margin: 45px 0 0 0;
+}
+
+.social__item {
+
+}
+
+.social__button {
+
+}

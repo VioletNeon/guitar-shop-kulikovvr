@@ -1,0 +1,4 @@
+const MODAL_CLASS_NAME = 'modal';
+const KEY_ESCAPE_CODE = 27;
+
+export {MODAL_CLASS_NAME, KEY_ESCAPE_CODE};

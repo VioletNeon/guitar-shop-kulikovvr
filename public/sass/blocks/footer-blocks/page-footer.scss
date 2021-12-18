@@ -1,0 +1,33 @@
+.page-footer {
+  background-color: $deep-dark-gray;
+  min-width: 1020px;
+}
+
+.page-footer__wrapper-decoration {
+  width: 100%;
+  padding: 25px 0 0 0;
+  background-color: $white;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.page-footer__wrapper {
+  display: flex;
+  padding: 63px 40px;
+  margin: 0 auto;
+  max-width: 1020px;
+  z-index: 2;
+}
+
+.page-footer__logo-link {
+  height: fit-content;
+}
+
+.page-footer__wrapper-nav {
+  display: flex;
+  margin: 0 85px 0 120px;
+}
+
+.page-footer__wrapper-contacts.page-footer__wrapper-contacts {
+  padding: 0;
+}

@@ -1,0 +1,15 @@
+.decoration-footer-lines {
+  width: 100%;
+  height: 85px;
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 71px;
+    width: 100%;
+    height: 6px;
+    background-color: $deep-dark-gray;
+  }
+}

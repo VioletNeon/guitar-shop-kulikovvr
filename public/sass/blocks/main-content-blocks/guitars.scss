@@ -67,10 +67,28 @@
 
 .guitars__button-detail {
   background-color: $gray;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $dark-gray;
+  }
+
+  &:active {
+    background-color: $middle-gray;
+  }
 }
 
 .guitars__button-buy {
   background-color: $orange;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $orange-hover;
+  }
+
+  &:active {
+    background-color: $orange-click;
+  }
 }
 
 .guitars__button-buy svg {
