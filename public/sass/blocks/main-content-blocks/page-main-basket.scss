@@ -1,0 +1,17 @@
+.page-main-basket {
+  display: grid;
+  grid-template-rows: min-content min-content min-content;
+  grid-template-columns: max-content;
+  padding: 0 40px;
+  width: 1020px;
+  margin: 0 auto 40px auto;
+}
+
+.page-main-basket__tittle {
+  @include font-special(700);
+  @include font-size(22px, 26px);
+
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+  margin: 0 0 20px 0;
+}

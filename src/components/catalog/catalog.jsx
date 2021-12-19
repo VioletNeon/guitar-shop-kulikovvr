@@ -5,9 +5,10 @@ import Main from '../main';
 import Footer from '../footer/footer';
 import SuccessfulAdditionModal from '../successful-addition-modal/successful-addition-modal';
 import DeleteProductModal from '../delete-product-modal/delete-product-modal';
+import Basket from '../basket';
 
 function Catalog() {
-  const [isModalAddProductOpen, setModalAddProductState] = useState(true);
+  const [isModalAddProductOpen, setModalAddProductState] = useState(false);
   const [isModalSuccessfulAdditionOpen, setModalSuccessfulAdditionState] = useState(false);
   const [isModalDeleteProductOpen, setModalDeleteProductState] = useState(false);
 
@@ -30,7 +31,7 @@ function Catalog() {
   return (
     <>
       <Header/>
-      <Main/>
+      <Basket/>
       {isModalAddProductOpen && <AddProductModal onModalAddProductStateSet={onModalAddProductStateSet} onModalSuccessfulAdditionStateSet={onModalSuccessfulAdditionStateSet}/>}
       {isModalSuccessfulAdditionOpen && <SuccessfulAdditionModal onModalSuccessfulAdditionStateSet={onModalSuccessfulAdditionStateSet}/>}
       {isModalDeleteProductOpen && <DeleteProductModal onModalDeleteProductStateSet={onModalDeleteProductStateSet}/>}
