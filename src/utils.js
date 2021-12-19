@@ -1,3 +1,6 @@
+const KEYCODE_TAB = 9;
+const NAME_KEYBOARD_TAB = 'Tab';
+
 const trapFocus = (element) => {
   const focusableElements = element.querySelectorAll('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])');
   const firstFocusableElement = focusableElements[0];
@@ -24,4 +27,6 @@ const trapFocus = (element) => {
   });
 };
 
-export {trapFocus};
+const getTernaryItem = (item) => item.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+export {trapFocus, getTernaryItem};

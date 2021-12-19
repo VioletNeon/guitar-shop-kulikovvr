@@ -1,4 +1,5 @@
 import React, {useEffect, useRef} from 'react';
+import PropTypes from 'prop-types';
 import {trapFocus} from '../../utils';
 import {MODAL_CLASS_NAME, KEY_ESCAPE_CODE} from '../../const';
 
@@ -64,5 +65,9 @@ function DeleteProductModal({onModalDeleteProductStateSet}) {
     </div>
   );
 }
+
+DeleteProductModal.propTypes = {
+  onModalDeleteProductStateSet: PropTypes.func.isRequired,
+};
 
 export default DeleteProductModal;

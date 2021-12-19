@@ -1,6 +1,6 @@
 import React from 'react';
 import Catalog from '../catalog/catalog';
-import {Switch, BrowserRouter, Route} from "react-router-dom";
+import {Switch, BrowserRouter, Route} from 'react-router-dom';
 
 function App() {
   return (

@@ -16,8 +16,17 @@
   box-sizing: border-box;
 }
 
+.guitars__wrapper-image {
+  height: 190px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 0 5px 0;
+}
+
 .guitars__image {
   margin: 0 auto;
+  height: auto;
 }
 
 .guitars__wrapper-rating {

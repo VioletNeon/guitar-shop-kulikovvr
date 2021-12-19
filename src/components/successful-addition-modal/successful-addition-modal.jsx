@@ -1,4 +1,5 @@
 import React, {useEffect, useRef} from 'react';
+import PropTypes from 'prop-types';
 import {trapFocus} from '../../utils';
 import {MODAL_CLASS_NAME, KEY_ESCAPE_CODE} from '../../const';
 
@@ -57,5 +58,9 @@ function SuccessfulAdditionModal({onModalSuccessfulAdditionStateSet}) {
     </div>
   );
 }
+
+SuccessfulAdditionModal.propTypes = {
+  onModalSuccessfulAdditionStateSet: PropTypes.func.isRequired,
+};
 
 export default SuccessfulAdditionModal;
