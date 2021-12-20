@@ -1,4 +1,5 @@
 import {ActionType} from './action';
+import {DEFAULT_PAGE} from '../const';
 
 const PAGE_GUITARS_COUNT = 9;
 
@@ -32,7 +33,7 @@ const filterGuitars = (guitarsList, filterParameters = []) => {
 const initialState = {
   guitars: [],
   filteredGuitars: '',
-  pageNumber: PAGE_GUITARS_COUNT,
+  currentPage: DEFAULT_PAGE,
   backUpFilteredGuitars: [],
   sortType: SortTypes.DEFAULT,
 };
@@ -57,12 +58,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         filteredGuitars: filterGuitars(state.guitars, action.payload),
         backUpFilteredGuitars: filterGuitars(state.guitars, action.payload),
-        pageNumber: initialState.pageNumber,
+        currentPage: initialState.currentPage,
       };
     case ActionType.SET_PAGE_NUMBER:
       return {
         ...state,
-        pageNumber: action.pageNumber,
+        currentPage: action.currentPage,
       };
     default:
       return state;

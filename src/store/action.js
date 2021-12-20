@@ -20,9 +20,9 @@ const changeSortType = (sortType) => ({
   sortType,
 });
 
-const setPageNumber = (pageNumber) => ({
+const setPageNumber = (currentPage) => ({
   type: ActionType.SET_PAGE_NUMBER,
-  pageNumber,
+  currentPage,
 });
 
 export {

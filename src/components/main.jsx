@@ -1,11 +1,24 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {useSelector} from 'react-redux';
-import {selectGuitars} from '../store/selectors';
+import {useDispatch, useSelector} from 'react-redux';
+import {setPageNumber} from '../store/action';
+import {selectGuitars, selectCurrentPage} from '../store/selectors';
 import Guitars from './guitars/guitars';
+import Pagination from './pagination/pagination';
+
+const GUITARS_COUNT = 9;
 
 function Main() {
   const guitars = useSelector(selectGuitars);
+  const currentPage = useSelector(selectCurrentPage);
+
+  const dispatch = useDispatch();
+
+  const pageCount = Math.ceil(guitars.length / GUITARS_COUNT);
+
+  const setNewPageNumber = (number) => {
+    dispatch(setPageNumber(number));
+  };
 
   return (
     <main className="page-main">
@@ -185,23 +198,7 @@ function Main() {
           </form>
         </div>
         <Guitars guitars={guitars}/>
-        <ul className="pagination">
-          <li>
-            <button className="pagination__page pagination__page--current" type="button">1</button>
-          </li>
-          <li>
-            <button className="pagination__page" type="button">2</button>
-          </li>
-          <li>
-            <button className="pagination__page pagination__page--averaged" type="button">...</button>
-          </li>
-          <li>
-            <button className="pagination__page" type="button">7</button>
-          </li>
-          <li>
-            <button className="pagination__page pagination__page--next" type="button">Далее</button>
-          </li>
-        </ul>
+        <Pagination pageCount={pageCount} currentPage={currentPage} setNewPageNumber={setNewPageNumber}/>
       </section>
     </main>
   );

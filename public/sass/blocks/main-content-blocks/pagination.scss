@@ -35,6 +35,17 @@
   margin: 0 0 0 4px;
 }
 
+.pagination__page--next-disabled {
+  padding: 0 21px 0 19px;
+  margin: 0 0 0 4px;
+  opacity: 0;
+}
+
+.pagination__page--back {
+  padding: 0 21px 0 19px;
+  margin: 0 4px 0 0;
+}
+
 .pagination__page--averaged {
   padding: 0 5px;
 }
