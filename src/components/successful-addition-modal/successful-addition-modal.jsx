@@ -1,22 +1,27 @@
 import React, {useEffect, useRef} from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {trapFocus} from '../../utils';
-import {MODAL_CLASS_NAME, KEY_ESCAPE_CODE} from '../../const';
+import {MODAL_CLASS_NAME, KEY_ESCAPE_CODE, AppRoute} from '../../const';
 
-function SuccessfulAdditionModal({onModalSuccessfulAdditionStateSet}) {
+function SuccessfulAdditionModal({onModalSuccessfulAdditionStateCloseSet}) {
   const modalMessage = useRef(null);
 
   const onEscKeyDown = (evt) => {
     if (evt.keyCode === KEY_ESCAPE_CODE) {
       evt.preventDefault();
-      onModalSuccessfulAdditionStateSet();
+      onModalSuccessfulAdditionStateCloseSet();
     }
   };
 
   const onOverlayModalClick = (evt) => {
     if (evt.target.className === MODAL_CLASS_NAME) {
-      onModalSuccessfulAdditionStateSet();
+      onModalSuccessfulAdditionStateCloseSet();
     }
+  };
+
+  const handleToBasketLinkClick = () => {
+    onModalSuccessfulAdditionStateCloseSet();
   };
 
   useEffect(() => {
@@ -30,18 +35,19 @@ function SuccessfulAdditionModal({onModalSuccessfulAdditionStateSet}) {
       <div className="modal__wrapper">
         <p className="modal__tittle-text">Товар успешно добавлен в корзину</p>
         <div className="modal__wrapper-button modal__wrapper-button--position">
-          <button
+          <Link
             className="modal__basket-button"
-            type="button"
             tabIndex="0"
+            to={AppRoute.BASKET}
+            onClick={handleToBasketLinkClick}
           >
             Перейти в корзину
-          </button>
+          </Link>
           <button
             className="modal__continue-button"
             type="button"
             tabIndex="0"
-            onClick={onModalSuccessfulAdditionStateSet}
+            onClick={onModalSuccessfulAdditionStateCloseSet}
           >
             Продолжить покупки
           </button>
@@ -51,7 +57,7 @@ function SuccessfulAdditionModal({onModalSuccessfulAdditionStateSet}) {
           type="button"
           aria-label="Закрыть"
           tabIndex="0"
-          onClick={onModalSuccessfulAdditionStateSet}
+          onClick={onModalSuccessfulAdditionStateCloseSet}
         >
         </button>
       </div>
@@ -60,7 +66,7 @@ function SuccessfulAdditionModal({onModalSuccessfulAdditionStateSet}) {
 }
 
 SuccessfulAdditionModal.propTypes = {
-  onModalSuccessfulAdditionStateSet: PropTypes.func.isRequired,
+  onModalSuccessfulAdditionStateCloseSet: PropTypes.func.isRequired,
 };
 
 export default SuccessfulAdditionModal;

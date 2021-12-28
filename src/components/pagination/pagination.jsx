@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {DEFAULT_PAGE} from '../../const';
 import PageItem from '../pagination-item/page-item';
 
@@ -25,11 +26,17 @@ function Pagination({pageCount, currentPage, setNewPageNumber}) {
         </button>
       </li>
       {pages.map((pageNumber) => (
-        <PageItem key={pageNumber} pageCount={pages.length} currentPage={currentPage} pageNumber={pageNumber} setNewPageNumber={setNewPageNumber}/>)
-      )}
+        <PageItem
+          key={pageNumber}
+          pageCount={pages.length}
+          currentPage={currentPage}
+          pageNumber={pageNumber}
+          setNewPageNumber={setNewPageNumber}
+        />
+      ))}
       <li>
         <button
-          className={`pagination__page ${currentPage === pageCount ? 'pagination__page--next-disabled' : 'pagination__page--next'}`}
+          className={`pagination__page ${currentPage === pageCount || pageCount === 0 ? 'visually-hidden' : 'pagination__page--next'}`}
           type="button"
           onClick={handleButtonNextClick}
           disabled={currentPage === pageCount}
@@ -40,5 +47,11 @@ function Pagination({pageCount, currentPage, setNewPageNumber}) {
     </ul>
   );
 }
+
+Pagination.propTypes = {
+  pageCount: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  setNewPageNumber: PropTypes.func.isRequired,
+};
 
 export default Pagination;

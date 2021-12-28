@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {DEFAULT_PAGE} from '../../const';
 
 const FOUR_PAGES = 4;
@@ -16,18 +17,54 @@ function PageItem({pageCount, currentPage, pageNumber, setNewPageNumber}) {
   };
 
   if (isCurrentPage) {
-    return <li><button className="pagination__page pagination__page--current" type="button" onClick={handleButtonPageClick}>{pageNumber}</button></li>;
+    return (
+      <li>
+        <button
+          className="pagination__page pagination__page--current"
+          type="button"
+          onClick={handleButtonPageClick}
+        >
+          {pageNumber}
+        </button>
+      </li>
+    );
   }
 
   if (pageCount <= FOUR_PAGES || isPreviousOrNextPage || !isNotFirstAndLastPage) {
-    return <li><button className="pagination__page" type="button" onClick={handleButtonPageClick}>{pageNumber}</button></li>;
+    return (
+      <li>
+        <button
+          className="pagination__page"
+          type="button"
+          onClick={handleButtonPageClick}
+        >
+          {pageNumber}
+        </button>
+      </li>
+    );
   }
 
   if (isSubPreviousOrNextPage && isNotFirstAndLastPage) {
-    return <li><button className="pagination__page pagination__page--averaged" type="button">...</button></li>;
+    return (
+      <li>
+        <button
+          className="pagination__page pagination__page--averaged"
+          type="button"
+        >
+          ...
+        </button>
+      </li>
+    );
   }
 
   return '';
 }
+
+PageItem.propTypes = {
+  pageCount: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  setNewPageNumber: PropTypes.func.isRequired,
+  pageNumber: PropTypes.number.isRequired,
+};
 
 export default PageItem;

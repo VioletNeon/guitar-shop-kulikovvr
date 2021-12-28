@@ -1,7 +1,62 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import {useDispatch, useSelector} from 'react-redux';
+import {Link, Redirect} from 'react-router-dom';
+import {AppRoute} from '../../const';
+import DeleteProductModal from '../delete-product-modal/delete-product-modal';
+import BasketGuitar from '../basket-guitar/basket-guitar';
+import {
+  selectIsModalDeleteProductOpen,
+  selectPopupDeleteFromBasketGuitar,
+  selectPromoCode, selectTotalAmount
+} from '../../store/selectors';
+import {
+  addGuitarInBasketList, deleteGuitarFromBasketList, calculateAmount,
+  setModalDeleteProductState, setPromoCode, calculateByPromoCode
+} from '../../store/action';
 
-function Basket() {
+function MainBasket({basketGuitars}) {
+  const isModalDeleteProductOpen = useSelector(selectIsModalDeleteProductOpen);
+  const promoCode = useSelector(selectPromoCode);
+  const totalAmount = useSelector(selectTotalAmount);
+  const popupDeleteFromBasketGuitar = useSelector(selectPopupDeleteFromBasketGuitar);
+
+  const dispatch = useDispatch();
+
+  if (basketGuitars.length === 0) {
+    return <Redirect to={AppRoute.MAIN}/>;
+  }
+
+  const onStartDeleteProductButtonClick = (guitarNumber) => {
+    dispatch(setModalDeleteProductState(!isModalDeleteProductOpen, guitarNumber));
+    document.body.style.overflow = isModalDeleteProductOpen ? 'visible' : 'hidden';
+  };
+
+  const onAddProductButtonClick = (additionGuitar) => {
+    dispatch(addGuitarInBasketList(additionGuitar));
+    dispatch(calculateAmount());
+  };
+
+  const onDeleteProductButtonClick = () => {
+    dispatch(setModalDeleteProductState(!isModalDeleteProductOpen));
+    dispatch(deleteGuitarFromBasketList(popupDeleteFromBasketGuitar));
+    dispatch(calculateAmount());
+    document.body.style.overflow = isModalDeleteProductOpen ? 'visible' : 'hidden';
+  };
+
+  const onModalDeleteProductCloseStateSet = () => {
+    dispatch(setModalDeleteProductState(!isModalDeleteProductOpen));
+    document.body.style.overflow = isModalDeleteProductOpen ? 'visible' : 'hidden';
+  };
+
+  const handlePromoCodeInputChange = (evt) => {
+    dispatch(setPromoCode(evt.target.value));
+  };
+
+  const handleCalculateByPromoCodeButtonClick = () => {
+    dispatch(calculateByPromoCode());
+  };
+
   return (
     <main className="page-main-basket">
       <h1 className="page-main-basket__tittle">Корзина</h1>
@@ -31,54 +86,14 @@ function Basket() {
       <section className="basket-section">
         <h2 className="visually-hidden">Список товаров в корзине</h2>
         <ul className="basket">
-          <li className="basket__item">
-            <button
-              className="basket__close-button"
-              type="button"
-              aria-label="Закрыть"
-              tabIndex="0"
-            >
-            </button>
-            <img className="basket__image" src={'img/chester-bass.jpg'} width="48" height="124" alt="Гитара Chester Bass"/>
-            <div className="basket__text-wrapper">
-              <p className="basket__text-name">Гитара Честер bass</p>
-              <p className="basket__text">Артикул: SO757575</p>
-              <p className="basket__text">Электрогитара, 6 струнная</p>
-            </div>
-            <div className="basket__wrapper-price">
-              <p className="basket__text-price">17 500 ₽</p>
-              <button className="basket__remove-product">
-              </button>
-              <span className="basket__count-item">1</span>
-              <button className="basket__add-product">
-              </button>
-              <p className="basket__text-sum-price">17 500 ₽</p>
-            </div>
-          </li>
-          <li className="basket__item">
-            <button
-              className="basket__close-button"
-              type="button"
-              aria-label="Закрыть"
-              tabIndex="0"
-            >
-            </button>
-            <img className="basket__image" src={'img/chester-bass.jpg'} width="48" height="124" alt="Гитара Chester Bass"/>
-            <div className="basket__text-wrapper">
-              <p className="basket__text-name">Гитара Честер bass</p>
-              <p className="basket__text">Артикул: SO757575</p>
-              <p className="basket__text">Электрогитара, 6 струнная</p>
-            </div>
-            <div className="basket__wrapper-price">
-              <p className="basket__text-price">17 500 ₽</p>
-              <button className="basket__remove-product">
-              </button>
-              <span className="basket__count-item">1</span>
-              <button className="basket__add-product">
-              </button>
-              <p className="basket__text-sum-price">17 500 ₽</p>
-            </div>
-          </li>
+          {basketGuitars.map((basketGuitar) => (
+            <BasketGuitar
+              basketGuitar={basketGuitar}
+              onStartDeleteProductButtonClick={onStartDeleteProductButtonClick}
+              onAddProductButtonClick={onAddProductButtonClick}
+              key={basketGuitar.number}
+            />
+          ))}
         </ul>
         <div className="basket__wrapper-checkout">
           <div className="basket__discount discount">
@@ -86,19 +101,35 @@ function Basket() {
             <span className="discount__description">Введите свой промокод, если он у вас есть.</span>
             <div className="discount__wrapper-button">
               <label className="discount__promo-code">
-                <input className="discount__promo-code-input" type="text"/>
+                <input className="discount__promo-code-input" type="text" onChange={handlePromoCodeInputChange} value={promoCode}/>
               </label>
-              <button className="discount__button-apply" type="button">Применить купон</button>
+              <button
+                className="discount__button-apply"
+                type="button"
+                onClick={handleCalculateByPromoCodeButtonClick}
+              >
+                Применить купон
+              </button>
             </div>
           </div>
           <div className="basket__checkout">
-            <p className="basket__checkout-tittle">Всего: 47 000 ₽ </p>
+            <p className="basket__checkout-tittle">Всего: {totalAmount} ₽ </p>
             <button className="basket__button-checkout" type="button">Оформить заказ</button>
           </div>
         </div>
       </section>
+      {isModalDeleteProductOpen &&
+        <DeleteProductModal
+          onModalDeleteProductCloseStateSet={onModalDeleteProductCloseStateSet}
+          onDeleteProductButtonClick={onDeleteProductButtonClick}
+          popupDeleteFromBasketGuitar={popupDeleteFromBasketGuitar}
+        />}
     </main>
   );
 }
 
-export default Basket;
+MainBasket.propTypes = {
+  basketGuitars: PropTypes.array.isRequired,
+};
+
+export default MainBasket;
